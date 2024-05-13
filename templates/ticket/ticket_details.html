@@ -1,0 +1,100 @@
+{% extends 'base.html'%}
+{% block content %}
+
+
+<div class="row p-5 mb-4 bg-light rounded-3">
+    <div class="col-md-8">
+        <div class="py-5">
+            <h1 class="display-6 fw-bold">{{ticket.ticket_title}}</h1>
+            <p class="">
+                {{ticket.ticket_description}}
+            </p>
+            {% if ticket.status == 'Pending' %}
+            <span class="badge bg-warning">Pending</span>
+            {% elif ticket.status == 'Active' %}
+            <span class="badge bg-success">Active</span>
+            {% elif ticket.status == 'Resolved' %}
+            <span class="badge bg-danger">Resolved</span>
+            {% endif %}
+        </div>
+
+        <div class="col-md-4">
+            <div class="shadow">
+                <div class="card-body">
+                    <div class="py-5">
+                        <h2 class="display-6">Quick Info</h2>
+                        <p class="card-text">
+                            Quick info about the ticket and the customer you are supporting
+                        </p>
+                        <ul class="icon-list">
+
+                            <li><b>Ticket Unique ID: </b>{{ticket.ticket_id}}
+                            </li>
+                            <li><b>Customer ID: </b>{{ticket.customer}}
+                            </li>
+
+                            <li><b>Engineer ID: </b>{{ticket.engineer}}
+                            </li>
+
+                            <li>Created On: <b>{{ticket.created_on}}</b>
+                            </li>
+                            <li>Severity ID: <b>{{ticket.severity}}</b>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% if ticket.is_resolved %}
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Resolution Steps</h5>
+                {{ticket.resolution_steps}}
+            </div>
+        </div>
+    </div>
+</div>
+{% else %}
+{% if request.user.is_engineer %}
+
+<button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Mark As
+    Resolved</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fs-5" id="exampleModalLabel">Resolution Steps</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="">
+                    <div class="">
+
+                        <form action="{% url 'resolve_ticket' ticket.ticket_id %}" method="POST">
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                <label for="exampleFormControlTextarea" class="form-label">
+                                    Here's how the issue was resolved
+                                </label>
+                                <textarea class="form-control" id="exampleFormControlTextarea" rows="3"
+                                    name="rs"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#exampleModal">Save</button>
+                        </form>                        
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+</div>
+{% endif %}
+{% endif %}
+
+
+{% endblock cintent %}

@@ -1,0 +1,48 @@
+{% extends "base.html" %} {% block content %}
+
+<div class="p-5 mb-4 bg-light rounded-3">
+  <div class="container-fluid py-5">
+    <h1 class="display-5 fw-bold">Customer Dashboard</h1>
+    <p class="col-lg-10 fs-4">
+      zxjncv;dnhfvahefojhg[erioj[eoifj[oejgo[eifj[adioj;pdjnndgbnadjfgnd;lfjnd;jndlbdngjkd;dn
+    </p>
+    <a
+      href="(% {% url 'create-ticket'  %} %)"
+      class="btn btn-primary btn-lg"
+      role="button"
+      >Create New Ticket</a
+    >
+  </div>
+</div>
+
+<div>
+  <div class="row">
+    <div class="col">
+      <div class="p-5 mb-4 bg-light rounded-3">
+        <div class="container-fluid py-5">
+          <h1 class="display-6 fw-bold">
+            Active Tickets<br />{{active_tickets}}
+          </h1>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="p-5 mb-4 bg-light rounded-3">
+        <div class="container-fluid py-5">
+          <h1 class="display-6 fw-bold">
+            Closed Tickets<br />{{closed_tickets}}
+          </h1>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="p-5 mb-4 bg-light rounded-3">
+        <div class="container-fluid py-5">
+          <h1 class="display-6 fw-bold">Total Tickets<br />{{tickets}}</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

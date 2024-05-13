@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="card">
+    <div class="card-body">
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Ticket ID</th>
+                <th scope="col">Ticket Title</th>
+                <th scope="col">Customer</th>
+                <th scope="col">Date Created</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for ticket in tickets %}
+              <tr>
+                <td href="{% url 'ticket-details' ticket.ticket_id %}">{{ticket.ticket_id}}</td>
+                <td>{{ticket.ticket_title}}</td>
+                <td>{{ticket.customer}}</td>
+                <td>{{ticket.created_on}}</td>
+                <td>
+                    <a href="{% url 'assign-ticket' ticket.ticket_id %}" class="btn btn-primary-outline btn-sm">Assign To Engineer</a>
+                </td>
+              </tr>
+              {% endfor %}
+              <tr>
+                <th scope="row">2</th>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@fat</td>
+              </tr>
+              <tr>
+                <th scope="row">3</th>
+                <td colspan="2">Larry the Bird</td>
+                <td>@twitter</td>
+              </tr>
+            </tbody>
+          </table>
+    </div>
+  </div>
+
+{% endblock content %}

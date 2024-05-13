@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'apps.accounts',
     'apps.dashboard',
     'apps.tickets',
+    'widget_tweaks'
 ]
 
 MIDDLEWARE = [
